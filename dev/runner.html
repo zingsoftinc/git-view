@@ -1,0 +1,44 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <style>
+      gv-directory-folder, gv-directory-item {
+        display: block;
+      }
+      gv-directory-folder  {
+        margin-left: 1rem;
+      }
+      gv-directory-folder .folder-name {
+        border-bottom: 1px solid black;
+        margin-left: -1rem;
+      }
+
+      #container {
+        height: 100%;
+        width: 100%;
+      }
+      github-viewer {
+        height: 100%;
+        width: 100%;
+      }
+      gv-code-viewer {
+        flex:1;
+        background:gray;
+      }
+      gv-preview {
+        flex:1;
+        background:black;
+      }
+    </style>
+    <div id="container">
+      <!-- <git-view repo="zingchart/vue-dashboard" preview-branch="gh-pages" preview-page="index.html"></git-view> -->
+      <git-view gist="5e6334bf6195c979bb32de85354876c2" preview-page="index.html"></git-view>
+    </div>
+    <script type="module">
+      import GitView from './GitView.js';
+      customElements.define('git-view', GitView);
+    </script>
+  </body>
+</html>
