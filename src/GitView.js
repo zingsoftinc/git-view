@@ -160,9 +160,8 @@ class GitView extends HTMLElement {
  
 
   setEventListeners() {
-    this.elements.directory.addEventListener('click', (ev) => {
-      const path = ev.path[0].getAttribute('data-path');
-      if(path) {
+    this.elements.directory.addEventListener('file-click', (ev) => {
+        const path = ev.detail;
         const url = `https://raw.githubusercontent.com/${this.repo}/master/${path}`;
         if(this.cache.has(path)){
             this.renderCode(path);
@@ -178,8 +177,8 @@ class GitView extends HTMLElement {
               console.error(err);
             });
           }
-      }
-    }, true);
+        
+    })
     this.elements.code.addEventListener('show-preview', (ev) => {
       this.elements.preview.className = '';
     });

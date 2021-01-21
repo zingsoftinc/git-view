@@ -9,31 +9,25 @@ export default html`
   :host {
     --background: #424242;
     --border-color: #212121;
-
-   }
-  :host {
     display: flex;
     flex-direction: column;
     background-color: var(--background);
     border-right: 1px solid var(--border-color);
     height: 100%;
     width: 100%;
-  }
-
-  .gv-top, .gv-footer {
+   }
+  .gv-footer {
     display: flex;
     align-items: center;
-    padding: 0.2rem;
     height: 30px;
     width: 100%;
     background: var(--border-color);
     color: white;
     font-size: 0.8rem;
-  }
-  .gv-footer {
     padding: 0px;
     justify-content: space-between;
   }
+ 
   .gv-footer a {
     display: flex;
     align-items: center;
@@ -63,9 +57,6 @@ export default html`
     width: 200px;
     min-width: 200px;
   }
-  .gv-top__files {
-    width: 200px;
-  }
   gv-code-viewer {
     width: 100%;
   }
@@ -82,11 +73,18 @@ export default html`
     width: 100%;
     fill: white;
   }
+  .content__right {
+    display: flex;
+    position: relative;
+    flex: 1;
+  }
 </style>
 <section class="content">
   <gv-directory></gv-directory>
-  <gv-code-viewer></gv-code-viewer>
-  <gv-preview></gv-preview>
+  <section class="content__right">
+    <gv-code-viewer></gv-code-viewer>
+    <gv-preview></gv-preview>
+  </section>
 </section>
 <section class="gv-footer">
   <div class="gv-footer__title">
