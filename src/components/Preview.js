@@ -29,19 +29,8 @@ class Preview extends HTMLElement {
 
     // Load the repo
     if(repo) {
-      fetch(`https://api.github.com/repos/${repo}/contents/${page}?ref=${branch}`)
-      .then((response) => {
-          return response.json();
-      }).then((data) => {
-          let frame = this.root.querySelector('iframe');
-          let page = atob(data['content']);
-          const startOfHead = page.indexOf('<head>') + 6;
-          page = page.slice(0, startOfHead) + `<base href="https://${repo.split('/')[0]}.github.io/${repo.split('/')[1]}">` + page.slice(startOfHead);
-          frame.src = 'data:text/html;base64,' + encodeURIComponent(btoa(page));
-      })
-      .catch((err) => {
-        console.error('Github page could not be found');
-      });
+      let frame = this.root.querySelector('iframe');
+      frame.src = `https://${repo.split('/')[0]}.github.io/${repo.split('/')[1]}`
     // Load the gist
     } else {
       let frame = this.root.querySelector('iframe');

@@ -23,7 +23,6 @@ export default html`<style>
     z-index: 1;
     overflow: scroll;
     margin: 0;
-    padding: 0rem 1rem 1rem 0;
   }
   .line-num {
     display: inline-block;

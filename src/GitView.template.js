@@ -51,6 +51,7 @@ export default html`
   .content {
     display: flex;
     height: 100%;
+    width: 100%;
     overflow: hidden;
   }
   gv-directory {
@@ -73,6 +74,7 @@ export default html`
     width: 100%;
     fill: white;
   }
+
   .content__right {
     display: flex;
     position: relative;

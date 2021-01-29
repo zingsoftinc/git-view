@@ -15,6 +15,9 @@ export default html`
     width: 100%;
     height: 100%;
   }
+  .preview {
+    height: 100%;
+  }
   .top {
     height: 100%;
     display: flex;

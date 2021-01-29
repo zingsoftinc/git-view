@@ -3,7 +3,7 @@ import SVGIcons from '../../assets/icons.js';
 export default html`
 <style>
   :host(gv-directory) {
-    display: block;
+    display: flex;
     height: 100%;
     font-size:0.8rem;
     color: white;
@@ -46,6 +46,7 @@ export default html`
     display: flex;
     flex-direction: column;
     height: 100%;
+    flex: 1;
   }
   .gv-top {
     display: flex;

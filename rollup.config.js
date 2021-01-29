@@ -3,12 +3,12 @@ import {terser} from 'rollup-plugin-terser'; //ES minifier
 import alias from '@rollup/plugin-alias';
 
 export default {
-  input: './src/GitView.js',
+  input: './src/main.js',
   output: {
       file: './dist/git-view.min.js',
-      format: 'es',
+      format: 'iife',
       name: 'main',
-      compact: true,
+      compact: false,
       minifyInternalExports: true,
   },
   plugins: [

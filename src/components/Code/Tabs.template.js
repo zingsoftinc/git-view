@@ -9,7 +9,6 @@ export default html`
   display: flex;
   align-items: center;
   height: 30px;
-  width: 100%;
   background: #212121;
   color: white;
   font-size: 0.8rem;
