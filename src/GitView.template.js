@@ -1,5 +1,5 @@
 import {html} from '/node_modules/lit-html/lit-html.js';
-
+import SVGIcons from '../../assets/icons.js';
 export default html`
 <style>
   * {
@@ -53,10 +53,10 @@ export default html`
     height: 100%;
     width: 100%;
     overflow: hidden;
+    position: relative;
   }
   gv-directory {
     width: 200px;
-    min-width: 200px;
   }
   gv-code-viewer {
     width: 100%;
@@ -80,12 +80,67 @@ export default html`
     position: relative;
     flex: 1;
   }
+
+  .resizer {
+    position: absolute;
+    left: -5px;
+    width: 10px;
+    background: none;
+    height: 100%;
+    cursor: col-resize;
+  }
+  .collapsed-pane {
+    display: none;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #212121;
+    cursor: pointer;
+    user-select: none;
+  }
+  .collapsed-page--hidden {
+    display: none;
+  }
+  .collapsed-pane__contents {
+    display: flex;
+    transform: rotate(-90deg);
+    align-items: center;
+    width: 40px;
+    color: white;
+  }
+
+  .folder-icon svg {
+    width: 15px;
+    height: 15px;
+    fill: #2196f3;
+    margin-right: 1rem;
+  }
+  .resizer-helper {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: right;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    user-select: none;
+  }
+
 </style>
 <section class="content">
+  <section class="collapsed-pane">
+    <div class="collapsed-pane__contents">
+      <div class="folder-icon">${SVGIcons.folder}</div>
+      Files
+    </div>
+  </section>
   <gv-directory></gv-directory>
   <section class="content__right">
+    <div class="resizer"></div>
     <gv-code-viewer></gv-code-viewer>
     <gv-preview></gv-preview>
+    <div class="resizer-helper"></div>
   </section>
 </section>
 <section class="gv-footer">

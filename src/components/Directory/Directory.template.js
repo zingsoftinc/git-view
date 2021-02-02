@@ -17,6 +17,7 @@ export default html`
     display: flex;
     align-items: center;
     height: 15px;
+    width: 15px;
     padding: 2px;
     margin-right: 4px;
   }
@@ -24,9 +25,17 @@ export default html`
     height: 70%;
     fill: #2196f3;
   }
+
+  .files-icon, .files-icon svg {
+    height: 15px;
+    width: 15px;
+  }
+  .files-icon {
+    margin-right: 0.3rem;
+    margin-left: 0.5rem;
+  }
   .folder, .gv-directory-item {
     cursor: pointer;
-    padding: 0.3rem;
   }
    .folder:hover, .gv-directory-item:hover {
     background: gray;
@@ -35,9 +44,6 @@ export default html`
     display: block;
   }
   
-  .gv-directory-folder > * {
-    padding-left: 1rem;
-  }
   .gv-directory-item {
     display: block;
     padding-top: 0.4rem;
@@ -51,6 +57,7 @@ export default html`
   .gv-top {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-left: 8px;
     min-height: 30px;
     width: 100%;
@@ -63,9 +70,23 @@ export default html`
     overflow: scroll;
     margin: 0 0.5rem;
   }
+
+  /* Directory spacing */
+
+  .gv-directory-folder > :not(.folder) {
+    padding-left: 1rem;
+  }
+
+  .gv-directory-folder {
+    margin-top: 0.2rem;
+  }
+
 </style>
 <div class="container">
-  <section class="gv-top"><div class="folder-icon">${SVGIcons.folder}</div>Files</section>
+  <section class="gv-top">
+    <div><div class="files-icon">${SVGIcons.files}</div>Files</div>
+    <button> f </button>
+  </section>
   <section class="gv-directory"></section>
 </div>
-`;
+ `;

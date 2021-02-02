@@ -44,7 +44,6 @@ export default html`
 .close svg {
   height: 100%;
   width: 100%;
-  fill: white;
 }
 </style>
 <div class="gv-top__tabs">

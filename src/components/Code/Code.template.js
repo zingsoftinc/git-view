@@ -28,7 +28,8 @@ export default html`<style>
     display: inline-block;
     margin-right: 0.2rem;
     padding-left: 1rem;
-    background: #d4d4d4;
+    padding-right: 0.2rem;
+    border-right: 1px solid black;
     color: gray;
   }
   .code-top {
@@ -41,19 +42,20 @@ export default html`<style>
   .code-top > * {
     height:30px;
   }
-  .preview {
+  button {
     display: block;
     padding: 0.2rem 0.4rem;
-    margin: 0 0.4rem;
+    margin-right: 0.4rem;
     background: #2196f3;
     color: white;
     border: 1px solid #2196f3;
     font-size: 0.8rem;
-    height: 100%;
     white-space: nowrap;
     cursor: pointer;
+    text-align: center;
     user-select: none;
     outline: 0;
+    height: 24px !important;
   }
   #placeholder {
     height: calc(100%);
@@ -98,7 +100,7 @@ export default html`<style>
 <div class="container">
   <section class="code-top">
     <gv-tabs></gv-tabs>
-    <div><button class="preview">Preview</button></div>
+    <button class="preview">Preview</button>
   </section>
     <div id="placeholder">Select a file from the directory</div>
   <pre></pre>

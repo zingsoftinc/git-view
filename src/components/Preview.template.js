@@ -14,6 +14,7 @@ export default html`
   .container {
     width: 100%;
     height: 100%;
+    position: relative;
   }
   .preview {
     height: 100%;
@@ -31,7 +32,7 @@ export default html`
     font-size: 0.8rem;
   }
 
-  .close {
+  button {
     display: block;
     padding: 0.2rem 0.4rem;
     margin-right: 0.4rem;
@@ -53,8 +54,10 @@ export default html`
     border: 0px;
     background: white;
   }
+
   </style>
   <div class="container">
+    
     <div class="top">
       <div>Preview</div>
       <button class="close">Close</button>

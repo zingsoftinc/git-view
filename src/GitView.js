@@ -15,6 +15,7 @@ class GitView extends HTMLElement {
       code: null,
       preview: null,
       directory: null,
+      resizer: null,
     };
 
     // Attributes
@@ -22,6 +23,7 @@ class GitView extends HTMLElement {
     this.branch;
     this.page;
     this.gist;
+    this.collapsed;
 
     // Interal properties
     this._gistKey;
@@ -29,6 +31,13 @@ class GitView extends HTMLElement {
     this._gistUrl;
     // An array of files for the directory tree.
     this._tree;
+
+    // Resizer
+    this.resizer = {
+      lastX: null,
+      defaultSize: 200,
+      size: 200,
+    }
     
   }
   static get observedAttributes() {
@@ -43,6 +52,7 @@ class GitView extends HTMLElement {
     this.branch = this.getAttribute('preview-branch') || 'gh-pages';
     this.page = this.getAttribute('preview-page') || 'index.html';
     this.gist = this.getAttribute('gist');
+    this.collapsed = this.getAttribute('collapsed') === '' || this.getAttribute('collapsed') || false;
 
     // Render out the initial template.
     this.render();
@@ -115,6 +125,11 @@ class GitView extends HTMLElement {
       preview.setAttribute('gist-url', this._gistUrl);
       preview.setAttribute('gist', this.page);
     }
+    if(this.collapsed) {
+      this.resizer.size = 40;
+      this.elements.directory.style.width = this.resizer.size + 'px';
+      this.setCollapsePane();
+    }
   }
   // Triggered on a file item click
   renderCode(path) {
@@ -122,7 +137,6 @@ class GitView extends HTMLElement {
     // Close the preview if its active
     this.elements.preview.className = 'hidden';
   }
-
 
    // Caches all files from the gist response
    setGistCache(files) {
@@ -155,29 +169,29 @@ class GitView extends HTMLElement {
     this.elements.code = this.root.querySelector('gv-code-viewer');
     this.elements.preview = this.root.querySelector('gv-preview');
     this.elements.footerLink = this.root.querySelector('.gv-footer__title');
+    this.elements.resizer = this.root.querySelector('.resizer');
   }
   
  
 
   setEventListeners() {
     this.elements.directory.addEventListener('file-click', (ev) => {
-        const path = ev.detail;
-        const url = `https://raw.githubusercontent.com/${this.repo}/master/${path}`;
-        if(this.cache.has(path)){
+      const path = ev.detail;
+      const url = `https://raw.githubusercontent.com/${this.repo}/master/${path}`;
+      if(this.cache.has(path)){
+          this.renderCode(path);
+        } else {
+          fetch(url)
+          .then(response => response.text())
+          .then((content) => {
+            content = serializeTextNode(content);
+            this.cache.set(path, content);
             this.renderCode(path);
-          } else {
-            fetch(url)
-            .then(response => response.text())
-            .then((content) => {
-              content = serializeTextNode(content);
-              this.cache.set(path, content);
-              this.renderCode(path);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-          }
-        
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+        }
     })
     this.elements.code.addEventListener('show-preview', (ev) => {
       this.elements.preview.className = '';
@@ -185,12 +199,74 @@ class GitView extends HTMLElement {
     this.elements.preview.addEventListener('close-preview', (ev) => {
       this.elements.preview.className = 'hidden';
     });
+
+
+    // Resizing
+    this.elements.resizer.addEventListener('mousedown', (ev) => {
+      this.resizer.lastX = ev.clientX;
+      this.enableResizer();
+    });
+    this.root.addEventListener('mouseup', (ev) => {
+      this.disableResizer();
+    });
+    // Off screen, reset
+    this.root.querySelector('.content').addEventListener('mouseenter', (ev) => {
+      this.disableResizer();
+    });
+    this.root.querySelector('.content').addEventListener('mousemove', (ev) => {
+      if(this.isResizing) {
+        this.resizePanes(ev);
+      }
+    });
+    this.elements.preview.addEventListener('close-preview', (ev) => {
+      this.elements.preview.className = 'hidden';
+    });
+
+    this.root.querySelector('.collapsed-pane').addEventListener('click', (ev) => {
+      this.resizer.size = this.resizer.defaultSize;
+      this.elements.directory.style.width = this.resizer.size + 'px';
+      this.removeCollapsePane();
+    })
+  }
+
+  enableResizer() {
+    this.isResizing = true;
+    
+    this.root.querySelector('.resizer-helper').style.display = 'inherit';
+  }
+
+  disableResizer() {
+    this.isResizing = false;
+    this.root.querySelector('.resizer-helper').style.display = 'none';
+  }
+
+  resizePanes(ev) {
+    const delta = ev.clientX - this.resizer.lastX;
+    this.resizer.lastX = ev.clientX;
+    this.resizer.size = this.resizer.size + delta;
+    // Min width;
+    if(this.resizer.size < 40) {
+      this.resizer.size = 40;
+    }
+    this.elements.directory.style.width = this.resizer.size + 'px';
+    if(this.resizer.size <= 45) {
+      this.setCollapsePane();
+    } else {
+      this.removeCollapsePane();
+    }
+  }
+  setCollapsePane() {
+    this.resizer.size = 40;
+    this.root.querySelector('.collapsed-pane').style.display = 'flex';
+  }
+  removeCollapsePane() {
+    this.root.querySelector('.collapsed-pane').style.display = 'none';
   }
  
   // Renders the footer link
   setFooter(url, name) {
     render(
-      html`<a href="url">
+      html`<a href="${url}">
         <div class="footer-icon">${SVGIcons.github}</div>
         ${name}
       </a>`,
