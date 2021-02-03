@@ -11,7 +11,7 @@ export default {
   </svg>
   `,
   folder: html`<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M17 32L49 68L81 32" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <path d="M17 32L49 68L81 32" stroke="white" stroke-width="10" stroke-linecap="round"/>
   </svg>
   `,
   files: html`<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">

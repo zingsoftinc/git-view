@@ -1,5 +1,5 @@
 import {html} from '/node_modules/lit-html/lit-html.js';
-import SVGIcons from '../../assets/icons.js';
+import SVGIcons from './assets/icons.js';
 export default html`
 <style>
   * {
@@ -114,7 +114,6 @@ export default html`
   .folder-icon svg {
     width: 15px;
     height: 15px;
-    fill: #2196f3;
     margin-right: 1rem;
   }
   .resizer-helper {

@@ -23,7 +23,6 @@ export default html`
   }
   .folder-icon svg {
     height: 70%;
-    fill: #2196f3;
   }
 
   .files-icon, .files-icon svg {
