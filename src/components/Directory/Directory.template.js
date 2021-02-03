@@ -36,6 +36,7 @@ export default html`
   }
   .folder, .gv-directory-item {
     cursor: pointer;
+    user-select: none;
   }
    .folder:hover, .gv-directory-item:hover {
     background: gray;
@@ -58,13 +59,34 @@ export default html`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 8px;
     min-height: 30px;
     width: 100%;
     background: #212121;
     color: white;
     font-size: 0.8rem;
   }
+  .gv-top > div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+  .files-icon {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .action-icon {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  .action-icon svg{
+    height: 100%;
+    width: 100%;
+  }
+
   .gv-directory {
     height: 100%;
     overflow: scroll;
@@ -72,11 +94,9 @@ export default html`
   }
 
   /* Directory spacing */
-
   .gv-directory-folder > :not(.folder) {
     padding-left: 1rem;
   }
-
   .gv-directory-folder {
     margin-top: 0.2rem;
   }
@@ -84,8 +104,13 @@ export default html`
 </style>
 <div class="container">
   <section class="gv-top">
-    <div><div class="files-icon">${SVGIcons.files}</div>Files</div>
-    <button> f </button>
+    <div class="gv-top__left">
+      <div class="files-icon">${SVGIcons.files}</div>
+      <div>Files</div>
+    </div>
+    <div class="gv-top__right"> 
+    <div class="action-icon">${SVGIcons.action}</div>
+    </div>
   </section>
   <section class="gv-directory"></section>
 </div>

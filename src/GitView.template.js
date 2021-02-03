@@ -56,6 +56,7 @@ export default html`
     position: relative;
   }
   gv-directory {
+    min-width: 200px;
     width: 200px;
   }
   gv-code-viewer {
@@ -131,7 +132,7 @@ export default html`
 <section class="content">
   <section class="collapsed-pane">
     <div class="collapsed-pane__contents">
-      <div class="folder-icon">${SVGIcons.folder}</div>
+      <div class="folder-icon">${SVGIcons.files}</div>
       Files
     </div>
   </section>

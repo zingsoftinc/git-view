@@ -200,6 +200,10 @@ class GitView extends HTMLElement {
       this.elements.preview.className = 'hidden';
     });
 
+    this.elements.directory.addEventListener('collapse-pane', (ev) => {
+      this.setCollapsePane();
+    });
+
 
     // Resizing
     this.elements.resizer.addEventListener('mousedown', (ev) => {
@@ -224,7 +228,8 @@ class GitView extends HTMLElement {
 
     this.root.querySelector('.collapsed-pane').addEventListener('click', (ev) => {
       this.resizer.size = this.resizer.defaultSize;
-      this.elements.directory.style.width = this.resizer.size + 'px';
+      // this.elements.directory.style.width = this.resizer.size + 'px';
+      this.resizePanes();
       this.removeCollapsePane();
     })
   }
@@ -241,14 +246,16 @@ class GitView extends HTMLElement {
   }
 
   resizePanes(ev) {
-    const delta = ev.clientX - this.resizer.lastX;
-    this.resizer.lastX = ev.clientX;
-    this.resizer.size = this.resizer.size + delta;
+    if(ev) {
+      const delta = ev.clientX - this.resizer.lastX;
+      this.resizer.lastX = ev.clientX;
+      this.resizer.size = this.resizer.size + delta;
+    }
     // Min width;
     if(this.resizer.size < 40) {
       this.resizer.size = 40;
     }
-    this.elements.directory.style.width = this.resizer.size + 'px';
+    this.elements.directory.style.minWidth = this.elements.directory.style.width =  this.resizer.size + 'px';
     if(this.resizer.size <= 45) {
       this.setCollapsePane();
     } else {
@@ -258,6 +265,7 @@ class GitView extends HTMLElement {
   setCollapsePane() {
     this.resizer.size = 40;
     this.root.querySelector('.collapsed-pane').style.display = 'flex';
+    this.resizePanes();
   }
   removeCollapsePane() {
     this.root.querySelector('.collapsed-pane').style.display = 'none';

@@ -96,6 +96,19 @@ export default html`<style>
     color: #7b7b7b;
     font-size: 0.8rem;
   }
+  pre {
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
+    position: absolute;
+    top: 30px;
+    height: calc(100% - 30px);
+    overflow: scroll;
+    width: 100%;
+  }
+  code {
+    word-wrap: normal;
+}
 </style>
 <div class="container">
   <section class="code-top">

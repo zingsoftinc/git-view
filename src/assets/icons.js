@@ -1,8 +1,8 @@
 import {html} from '/node_modules/lit-html/lit-html.js';
 export default {
   action: html`<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="96" height="96" rx="23" stroke="black" stroke-width="4"/>
-  <path d="M67 18L31 50L67 82" stroke="black" stroke-width="5" stroke-linecap="round"/>
+  <rect x="2" y="2" width="96" height="96" rx="23" stroke="#FFF" stroke-width="4"/>
+  <path d="M67 18L31 50L67 82" stroke="#FFF" stroke-width="5" stroke-linecap="round"/>
   </svg>
   `,
   close: html`<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">

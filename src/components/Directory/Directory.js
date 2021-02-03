@@ -61,6 +61,9 @@ class Directory extends HTMLElement {
     });
 
 
+    this.root.querySelector('.action-icon').addEventListener('click', (ev) =>{
+      this.dispatchEvent(new CustomEvent('collapse-pane'));
+    }, true);
     
   }
 }
