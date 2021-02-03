@@ -1,7 +1,7 @@
 {
   "name": "git-view",
   "version": "0.0.1",
-  "description": "",
+  "description": "Preview your GitHub and Gist repositories and it's output",
   "main": "src/main.js",
   "type": "module",
   "scripts": {

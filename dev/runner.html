@@ -1,40 +1,13 @@
 <html>
-  <head>
-
-  </head>
   <body>
     <style>
-      gv-directory-folder, gv-directory-item {
-        display: block;
-      }
-      gv-directory-folder  {
-        margin-left: 1rem;
-      }
-      gv-directory-folder .folder-name {
-        border-bottom: 1px solid black;
-        margin-left: -1rem;
-      }
-
       #container {
         height: 100%;
         width: 100%;
       }
-      github-viewer {
-        height: 100%;
-        width: 100%;
-      }
-      gv-code-viewer {
-        flex:1;
-        background:gray;
-      }
-      gv-preview {
-        flex:1;
-        background:black;
-      }
     </style>
     <div id="container">
       <git-view repo="zingchart-demos/zingchart-react" preview-branch="gh-pages" preview-page="index.html"></git-view>
-      <!-- <git-view gist="915a5734eff48d2286f3a2653a50c928" preview-page="index.html" collapsed></git-view> -->
     </div>
     <script type="module">
       import GitView from './GitView.js';
