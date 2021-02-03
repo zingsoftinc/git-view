@@ -1,18 +1,17 @@
 {
-  "name": "github-viewer",
-  "version": "1.0.0",
+  "name": "git-view",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.js",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
     "dev": "node dev/dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mike Schultz",
-  "license": "ISC",
+  "author": "ZingSoft Inc",
+  "license": "BSD",
   "dependencies": {
-    "highlight.js": "^10.5.0",
     "lit-element": "^2.4.0",
     "prism-es6": "^1.2.0",
     "prismjs": "^1.23.0"
@@ -22,8 +21,9 @@
     "@rollup/plugin-node-resolve": "^10.0.0",
     "express": "^4.17.1",
     "rollup": "^2.37.0",
-    "rollup-plugin-local-resolve": "^1.0.7",
-    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "rollup-plugin-license": "^2.2.0",
+    "rollup-plugin-minify-html-literals": "^1.2.5",
     "rollup-plugin-terser": "^7.0.2"
   }
 }
