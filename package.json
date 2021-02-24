@@ -1,6 +1,6 @@
 {
   "name": "git-view",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Preview your GitHub and Gist repositories and it's output",
   "main": "src/main.js",
   "type": "module",
@@ -18,6 +18,8 @@
     "prismjs": "^1.23.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/preset-env": "^7.13.5",
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "express": "^4.17.1",
