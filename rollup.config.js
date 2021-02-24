@@ -3,6 +3,7 @@ import minifyHTML from 'rollup-plugin-minify-html-literals';
 import alias from '@rollup/plugin-alias';
 import cleanup from 'rollup-plugin-cleanup';
 import license from 'rollup-plugin-license';
+import {babel} from '@rollup/plugin-babel';
 
 export default {
   input: './src/main.js',
@@ -50,5 +51,8 @@ export default {
  */
       `,
     }),
+    babel({
+      babelHelpers: 'bundled'
+    })
   ]
 }
