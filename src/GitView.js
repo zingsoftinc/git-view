@@ -24,6 +24,7 @@ class GitView extends HTMLElement {
     this.page;
     this.gist;
     this.collapsed;
+    this.defaultBranch;
 
     // Interal properties
     this._gistKey;
@@ -41,7 +42,7 @@ class GitView extends HTMLElement {
     
   }
   static get observedAttributes() {
-    return ['repo', 'preview-branch', 'preview-page', 'gist'];
+    return ['repo', 'preview-branch', 'preview-page', 'gist', 'default-branch'];
   }
   attributesChangedCallback(){
     this.fetchFromGit();
@@ -53,6 +54,7 @@ class GitView extends HTMLElement {
     this.page = this.getAttribute('preview-page') || 'index.html';
     this.gist = this.getAttribute('gist');
     this.collapsed = this.getAttribute('collapsed') === '' || this.getAttribute('collapsed') || false;
+    this.defaultBranch = this.getAttribute('default-branch') || 'master';
 
     // Render out the initial template.
     this.render();
@@ -64,7 +66,7 @@ class GitView extends HTMLElement {
   fetchFromGit() {
     // Fetch from a GitHub Repo
     if(this.repo && this.branch && this.page) {
-      fetch(`https://api.github.com/repos/${this.repo}/git/trees/master?recursive=1`)
+      fetch(`https://api.github.com/repos/${this.repo}/git/trees/${this.defaultBranch}?recursive=1`)
       .then((response) => response.json())
       .then(({tree}) => {
         this._tree = tree;
@@ -177,7 +179,7 @@ class GitView extends HTMLElement {
   setEventListeners() {
     this.elements.directory.addEventListener('file-click', (ev) => {
       const path = ev.detail;
-      const url = `https://raw.githubusercontent.com/${this.repo}/master/${path}`;
+      const url = `https://raw.githubusercontent.com/${this.repo}/${this.defaultBranch}/${path}`;
       if(this.cache.has(path)){
           this.renderCode(path);
         } else {

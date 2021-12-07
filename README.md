@@ -51,5 +51,7 @@ The id of the gist. Can be obtained by the url.
 #### `preview-page` (optional)
 The page to render as the preview. Defaults to `index.html`.
 
+#### `default-branch` (optional)
+The name of the default branch. Defaults to `master`.
 
 This project is supported by [ZingSoft](https://zingsoft.com) creators of the [web component datagrid library ZingGrid](https://zinggrid.com) and the [JavaScript charting library ZingChart](https://zingchart.com).
